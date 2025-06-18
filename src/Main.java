@@ -1,15 +1,48 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.util.Scanner;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+class Main {
+    // Function to find GCD of two numbers using the Euclidean Algorithm
+    public static int findGCD(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
+        return a;
+    }
+
+    // Function to find GCD of an array of numbers
+    public static int findGCDofArray(int[] arr) {
+        int result = arr[0]; // Start with the first number
+        for (int i = 1; i < arr.length; i++) {
+            result = findGCD(result, arr[i]);
+            if (result == 1) { // If GCD becomes 1, no need to continue
+                return 1;
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Taking input for the number of elements
+        System.out.print("Enter the number of elements: ");
+        int n = scanner.nextInt();
+        int[] numbers = new int[n];
+
+        // Taking input for the array elements
+        System.out.println("Enter the numbers:");
+        for (int i = 0; i < n; i++) {
+            numbers[i] = scanner.nextInt();
+        }
+
+        // Finding the GCD of the array
+        int gcd = findGCDofArray(numbers);
+
+        // Displaying the result
+        System.out.println("The GCD of the given numbers is: " + gcd);
+
+        scanner.close();
     }
 }
